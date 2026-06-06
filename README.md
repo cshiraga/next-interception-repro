@@ -1,36 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Intercepting Route Bug Reproduction
 
-## Getting Started
+Reproduces a bug where intercepting routes stop working after a full-page navigation to the target route in production (`next build` + `next start`).
 
-First, run the development server:
+## The Bug
+
+After visiting `/login` via a full-page navigation (URL bar, reload, `<a href>`), subsequent client-side navigations (`router.push` / `<Link>`) to `/login` show a **full page** instead of the intercepted modal.
+
+`next dev` is NOT affected.
+
+## Reproduction Steps
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run build && npm start
+# Open http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. Click **Login (router.push)** → modal appears ✓
+2. Visit `http://localhost:3000/login` directly in the URL bar → full page ✓
+3. Click **Other Page** to go back
+4. Click **Login (router.push)** again → ❌ full page (modal should appear)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Root Cause
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Static prerendering bakes `couldBeIntercepted: false` into the RSC payload because `setVaryHeader()` hasn't been called yet when `getRSCPayload()` reads the `Vary` header during build. See `app-render.js:965-966`.
 
-## Learn More
+## Environment
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Next.js 16.2.7
+- React 19.2.3
+- Node 24.14.0
