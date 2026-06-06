@@ -78,6 +78,8 @@ This causes the client to learn the route as non-interceptable via `discoverKnow
 
 **Why `next dev` works:** The dev server always sets `couldBeIntercepted: true` via `!!process.env.__NEXT_DEV_SERVER`.
 
+**Additional symptom:** While the login modal is open (URL is `/login` via interception), navigating to another page (e.g., `/other`) via client-side navigation keeps the modal overlay visible instead of dismissing it. The `@modal` slot should render `default.tsx` (null), but the optimistic route cache serves a stale tree with `(.)login` still mounted.
+
 **Related Issues:**
 - #63076 — "Intercepting routes feature not working in production"
 - #74895 — "Intercepting & Parallel route on vercel is broken"
