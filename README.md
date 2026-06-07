@@ -4,6 +4,8 @@ Reproduces a bug where intercepting routes stop working after a full-page naviga
 
 https://github.com/cshiraga/next-interception-repro
 
+https://github.com/user-attachments/assets/e1041add-c45f-4690-b906-a1d71881e5dc
+
 ---
 
 ## To Reproduce
