@@ -1,47 +1,27 @@
-import Link from "next/link";
+"use client";
+
+import { useRouter } from "next/navigation";
 
 export default function LoginModal() {
+  const router = useRouter();
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="w-full max-w-sm rounded-xl border bg-white p-8 shadow-lg">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="text-2xl font-bold">Login</h2>
-          <Link
-            href="/"
-            className="text-zinc-400 hover:text-zinc-800 text-xl leading-none"
+    <div style={{ position: "fixed", inset: 0, zIndex: 50, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,0.4)" }}>
+      <div style={{ border: "2px solid #000", background: "#fff", padding: 32, maxWidth: 360, width: "100%" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+          <div style={{ fontSize: 12, color: "#999" }}>INTERCEPTED MODAL (working)</div>
+          <button
+            onClick={() => router.back()}
+            style={{ background: "none", border: "none", cursor: "pointer", color: "#999", fontSize: 20, padding: 0 }}
           >
             ✕
-          </Link>
-        </div>
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium">Email</label>
-            <input
-              type="email"
-              className="mt-1 w-full rounded-lg border px-3 py-2 text-sm"
-              placeholder="you@example.com"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium">Password</label>
-            <input
-              type="password"
-              className="mt-1 w-full rounded-lg border px-3 py-2 text-sm"
-              placeholder="••••••••"
-            />
-          </div>
-          <button
-            type="button"
-            className="w-full rounded-lg bg-black px-4 py-2 text-sm font-medium text-white"
-          >
-            Sign in
           </button>
         </div>
-        <div className="mt-6 text-center text-sm text-zinc-500">
-          <Link href="/login" className="underline hover:text-zinc-800">
-            Open as full page instead
-          </Link>
-        </div>
+        <h2 style={{ fontSize: 22, fontWeight: 700, margin: "0 0 8px" }}>Login Modal</h2>
+        <p style={{ color: "#666", fontSize: 14, margin: "0 0 16px" }}>
+          This modal appears via interception route (.)login.
+        </p>
+
       </div>
     </div>
   );

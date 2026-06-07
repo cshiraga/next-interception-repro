@@ -2,14 +2,14 @@ import Link from "next/link";
 
 export default function OtherPage() {
   return (
-    <div className="flex flex-1 flex-col items-center justify-center gap-6">
-      <h1 className="text-3xl font-bold">Other Page</h1>
-      <p className="text-zinc-500">
-        Navigate back to Home from here, then try Login again.
+    <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16 }}>
+      <h1 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Other Page</h1>
+      <p style={{ color: "#666", margin: 0 }}>
+        Navigate back to Home, then try Login again to see the bug.
       </p>
       <Link
         href="/"
-        className="rounded-full bg-black px-6 py-3 text-sm font-medium text-white"
+        style={{ padding: "10px 24px", background: "#000", color: "#fff", textDecoration: "none", fontSize: 15 }}
       >
         Back to Home
       </Link>

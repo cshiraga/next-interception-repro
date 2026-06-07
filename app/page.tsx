@@ -7,28 +7,27 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-center gap-8 py-32 px-16 bg-white dark:bg-black">
-        <h1 className="text-4xl font-bold">Interception Repro</h1>
-        <p className="text-zinc-500 text-center max-w-md">
-          Click Login to see the modal. Then visit /login directly, go back, and
-          try Login again.
-        </p>
-        <div className="flex gap-4">
-          <button
-            onClick={() => router.push("/login")}
-            className="rounded-full bg-black px-6 py-3 text-sm font-medium text-white hover:bg-zinc-800"
-          >
-            Login (router.push)
-          </button>
-          <Link
-            href="/other"
-            className="rounded-full border border-black/10 px-6 py-3 text-sm font-medium hover:bg-zinc-100"
-          >
-            Other Page
-          </Link>
-        </div>
-      </main>
+    <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 24, padding: 32 }}>
+      <h1 style={{ fontSize: 28, fontWeight: 700, margin: 0 }}>Interception Repro</h1>
+      <p style={{ color: "#666", textAlign: "center", maxWidth: 400, margin: 0 }}>
+        1. Click "Login" → modal should appear (interception works)<br />
+        2. Visit /login directly → full page<br />
+        3. Go back here and click "Login" again → ❌ bug: full page instead of modal
+      </p>
+      <div style={{ display: "flex", gap: 12 }}>
+        <button
+          onClick={() => router.push("/login")}
+          style={{ padding: "10px 24px", background: "#000", color: "#fff", border: "none", cursor: "pointer", fontSize: 15 }}
+        >
+          Login (router.push)
+        </button>
+        <Link
+          href="/other"
+          style={{ padding: "10px 24px", border: "1px solid #ccc", color: "#000", textDecoration: "none", fontSize: 15 }}
+        >
+          Other Page (to go back)
+        </Link>
+      </div>
     </div>
   );
 }

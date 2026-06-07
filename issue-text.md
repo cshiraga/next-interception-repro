@@ -30,15 +30,22 @@ https://github.com/cshiraga/next-interception-repro
 Operating System:
   Platform: darwin
   Arch: arm64
-  Version: Darwin Kernel Version 24.6.0
+  Version: Darwin Kernel Version 25.5.0
+  Available memory (MB): 16384
+  Available CPU cores: 8
 Binaries:
   Node: 24.14.0
-  npm: 10.9.2
+  npm: 11.9.0
+  Yarn: N/A
+  pnpm: N/A
 Relevant Packages:
   next: 16.2.7
-  react: 19.2.3
-  react-dom: 19.2.3
-  typescript: 5.7.3
+  eslint-config-next: N/A
+  react: 19.2.4
+  react-dom: 19.2.4
+  typescript: 5.9.3
+Next.js Config:
+  output: N/A
 ```
 
 ---
